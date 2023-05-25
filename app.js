@@ -1,51 +1,26 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
-
-var indexRouter = require("./routes/index");
-var currentPresetRouter = require("./routes/currentPreset");
-var emailRouter = require("./routes/email");
-var presetRouter = require("./routes/preset");
-var scheduleRouter = require("./routes/schedule");
-var thcRouter = require("./routes/thc");
-var wateringRouter = require("./routes/watering-system");
-
-var app = express();
-
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-
-app.use(logger("dev"));
+const express = require("express");
+const app = express();
+const axios = require("axios");
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/", indexRouter);
-app.use("/api/", thcRouter);
-app.use("/api/", wateringRouter);
-app.use("/api/", currentPresetRouter);
-app.use("/api/", emailRouter);
-app.use("/api/", presetRouter);
-app.use("/api/", scheduleRouter);
+app.all("*", async (req, res) => {
+  try {
+    console.log(req.path);
+    const url = `http://34.88.136.103${req.path}`; // replace with your API server's IP
+    const result = await axios({
+      method: req.method,
+      url: url,
+      data: req.body,
+    });
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
+    res.status(result.status).json(result.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Something went wrong");
+  }
 });
 
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render("error");
-});
+const PORT = process.env.PORT || 6969;
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 module.exports = app;
