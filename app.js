@@ -20,7 +20,4 @@ app.all("*", async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 6969;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
-
 module.exports = app;
