@@ -6,7 +6,7 @@ app.use(express.json());
 app.all("*", async (req, res) => {
   try {
     console.log(req.path);
-    const url = `http://34.88.136.103${req.path}`; // replace with your API server's IP
+    const url = `http://34.88.136.103${req.path}`; 
     const result = await axios({
       method: req.method,
       url: url,
