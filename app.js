@@ -6,7 +6,7 @@ app.use(express.json());
 app.all("*", async (req, res) => {
   try {
     console.log(req.path);
-    const url = `http://34.88.136.103${req.path}`; 
+    const url = `http://34.88.136.103${req.path}`;
     const result = await axios({
       method: req.method,
       url: url,
@@ -16,7 +16,7 @@ app.all("*", async (req, res) => {
     res.status(result.status).json(result.data);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Something went wrong");
+    res.status(500).send(error);
   }
 });
 
