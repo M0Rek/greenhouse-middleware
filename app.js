@@ -23,6 +23,9 @@ app.all("*", async (req, res) => {
       method: req.method,
       url: url,
       data: req.body,
+      headers: {
+        Authorization: req.headers["authorization"],
+      },
     });
 
     res.status(result.status).json(result.data);
