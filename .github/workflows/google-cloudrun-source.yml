@@ -1,5 +1,4 @@
 # This workflow will deploy source code on Cloud Run when a commit is pushed to the "main" branch
-# 5. Change the values for the SERVICE and REGION environment variables (below).
 #
 # For more support on how to run this workflow, please visit https://github.com/marketplace/actions/deploy-to-cloud-run
 
