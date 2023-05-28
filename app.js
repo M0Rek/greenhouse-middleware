@@ -28,7 +28,7 @@ app.all("*", async (req, res) => {
     res.status(result.status).json(result.data);
   } catch (error) {
     console.error(error);
-    res.status(501).send(error);
+    res.status(500).send(error);
   }
 });
 
