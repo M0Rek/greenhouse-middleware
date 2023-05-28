@@ -36,6 +36,3 @@ jobs:
         with:
           source: ./
           service: ${{ env.SERVICE }}
-
-      - name: Show Output
-        run: echo ${{ steps.deploy.outputs.url }}
