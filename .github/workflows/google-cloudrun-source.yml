@@ -30,10 +30,7 @@ jobs:
         with:
           credentials_json: "${{ secrets.GCP_CREDENTIALS }}"
 
-      - name: Deploy to Cloud Run
-        id: deploy
-        uses: google-github-actions/deploy-cloudrun@v0
+      - name: Deploy to Cloud
+        uses: google-github-actions/deploy-appengine@v1
         with:
-          source: ./
-          service: ${{ env.SERVICE }}
-          region: ${{ env.REGION }}
+          project_id: "${{env.PROJECT_ID}}"
