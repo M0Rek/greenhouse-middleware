@@ -17,12 +17,12 @@ app.all("*", async (req, res) => {
   );
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   try {
-    console.log(req.path);
     const url = `${BACKEND_SERVER_IP}${req.path}`;
     const result = await axios({
       method: req.method,
       url: url,
       data: req.body,
+      params: req.query,
       headers: {
         Authorization: req.headers["authorization"],
       },
