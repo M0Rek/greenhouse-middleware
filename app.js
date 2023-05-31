@@ -5,7 +5,7 @@ const cors = require("cors");
 app.use(express.json());
 app.use(cors());
 
-const BACKEND_SERVER_IP = `http://34.88.224.173:`; //EDIT THIS LINE TO UPDATE THE IP (WITHOUT SLASH AT THE END WITH http://)
+const BACKEND_SERVER_IP = `http://34.88.59.39`; //EDIT THIS LINE TO UPDATE THE IP (WITHOUT SLASH AT THE END WITH http://)
 
 app.all("*", async (req, res) => {
   res.setHeader(
